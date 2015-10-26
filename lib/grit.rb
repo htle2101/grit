@@ -76,5 +76,5 @@ module Grit
 end
 
 # Include grit_ext
-require 'charlock_holmes'
+# require 'charlock_holmes'
 require 'grit_ext'

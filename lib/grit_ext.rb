@@ -1,4 +1,4 @@
-require "charlock_holmes"
+#require "charlock_holmes"
 require "grit_ext/actor"
 require "grit_ext/blob"
 require "grit_ext/commit"
@@ -17,13 +17,15 @@ module GritExt
     return message if message.valid_encoding?
 
     # return message if message type is binary
-    detect = CharlockHolmes::EncodingDetector.detect(message)
-    return message.force_encoding("BINARY") if detect && detect[:type] == :binary
+    message.force_encoding("BINARY")
+    return message if message.valid_encoding?
+    #detect = CharlockHolmes::EncodingDetector.detect(message)
+    #return message.force_encoding("BINARY") if detect && detect[:type] == :binary
 
-    # encoding message to detect encoding
-    if detect && detect[:encoding]
-      message.force_encoding(detect[:encoding])
-    end
+    ## encoding message to detect encoding
+    #if detect && detect[:encoding]
+      #message.force_encoding(detect[:encoding])
+    #end
 
     # encode and clean the bad chars
     message.replace clean(message)
